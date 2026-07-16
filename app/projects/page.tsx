@@ -127,11 +127,77 @@ export default function ProjectsPage() {
               Featured Case Studies
             </h2>
 
+            <div className="md:hidden w-full flex flex-col gap-6 px-4 py-4">
+              {MAIN_PROJECTS.map((project) => (
+                <Link
+                  key={project.slug}
+                  href={`/projects/${project.slug}`}
+                  className="w-full rounded-2xl border border-neutral-800 bg-[#121212] shadow-2xl flex flex-col p-4 cursor-pointer"
+                >
+                  <div className="w-full aspect-video rounded-xl bg-[#222222] border border-neutral-800/50 shadow-inner relative overflow-hidden mb-4">
+                    {(project.bannerImage || project.heroImage) ? (
+                      <Image
+                        src={project.bannerImage || project.heroImage || ""}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        sizes="85vw"
+                        priority
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-neutral-500 font-afacad tracking-widest text-sm uppercase">
+                        Image Coming Soon
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
+                      {project.logo ? (
+                        <Image
+                          src={project.logo}
+                          alt={`${project.title} logo`}
+                          width={26}
+                          height={26}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-neutral-300 rounded-full" />
+                      )}
+                    </div>
+                    <h3 className="font-agdasima text-3xl font-bold tracking-wide">
+                      {project.title}
+                    </h3>
+                  </div>
+
+                  <p className="font-afacad text-neutral-400 text-sm leading-snug">
+                    {project.description}
+                  </p>
+
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-neutral-800/60">
+                    <span className="px-2 py-0.5 rounded border border-neutral-800 bg-neutral-800 text-neutral-400 text-xs font-afacad shrink-0">
+                      {project.badge}
+                    </span>
+                    <div className="flex items-center gap-1.5 text-white font-medium hover:text-neutral-300 transition-colors group">
+                      <LinkIcon size={12} className="opacity-80" />
+                      <span className="text-xs font-bold font-afacad tracking-wider uppercase">
+                        View Case Study
+                      </span>
+                      <span className="ml-0.5 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="hidden md:flex w-full flex-col gap-10">
             {MAIN_PROJECTS.map((activeProject, mainIndex) => (
               <div
                 key={activeProject.slug}
                 id={activeProject.slug}
-                className="w-full rounded-xl overflow-hidden border -mt-4 border-neutral-800 bg-[#121212] shadow-2xl flex flex-col scroll-mt-32"
+                className="w-full rounded-xl overflow-hidden border border-neutral-800 bg-[#121212] shadow-2xl flex flex-col scroll-mt-32"
               >
                 {/* Browser Chrome Top (Tabs) */}
                 <div className="hidden md:flex items-end px-4 pt-2 bg-[#1A1A1A] gap-2 overflow-x-auto hide-scrollbar border-b border-neutral-800/20">
@@ -322,6 +388,7 @@ export default function ProjectsPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
 
           {/* Secondary Archived Projects */}
