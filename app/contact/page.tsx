@@ -16,11 +16,56 @@ const PROJECT_TYPES = [
 export default function ContactPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedType, setSelectedType] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSelect = (type: string) => {
     setSelectedType(type);
     setIsDropdownOpen(false);
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!fullName || !email || !message) {
+      setSubmitStatus("error");
+      setErrorMessage("Please fill out all required fields.");
+      return;
+    }
+
+    setSubmitStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          projectType: selectedType,
+          message,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setSubmitStatus("success");
+      setFullName("");
+      setEmail("");
+      setSelectedType("");
+      setMessage("");
+    } catch (err: any) {
+      setSubmitStatus("error");
+      setErrorMessage(err.message || "Failed to send email. Please try again later.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -111,13 +156,15 @@ export default function ContactPage() {
               </h3>
               <div className="flex justify-center md:justify-start gap-4 w-full">
                 {[
-                  { icon: "/images/facebook.svg", label: "Facebook"},
-                  { icon: "/images/github.svg", label: "Github"},
-                  { icon: "/images/x.svg", label: "Twitter"},
+                  { icon: "/images/facebook.svg", label: "Facebook", href: "https://www.facebook.com/developer.kamrulhasan/" },
+                  { icon: "/images/github.svg", label: "Github", href: "https://github.com/Kallolx" },
+                  { icon: "/images/x.svg", label: "Twitter", href: "https://x.com/khxKallol" },
                 ].map((social, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-20 h-20 bg-[#121212] border-2 border-neutral-800 rounded-2xl flex items-center justify-center text-neutral-400 hover:border-white hover:text-white hover:scale-105 transition-all duration-300 group shadow-lg overflow-hidden p-4"
                   >
                     <img 
@@ -134,7 +181,7 @@ export default function ContactPage() {
           {/* Right Column: Contact Form */}
           <div className="md:col-span-7">
             <div className="bg-[#121212] border-[4px] border-neutral-800 rounded-3xl p-6 md:p-10 shadow-[15px_15px_0px_0px_rgba(255,255,255,0.05)] relative group hover:border-[#5E2BE2] transition-colors duration-500">
-              <form className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-3">
                     <label className="font-agdasima text-xl uppercase tracking-wider text-neutral-400">
@@ -143,6 +190,9 @@ export default function ContactPage() {
                     <input
                       type="text"
                       placeholder="John Doe"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
                       className="bg-black border-[3px] border-neutral-800 p-4 rounded-xl text-white font-afacad focus:border-[#5E2BE2] outline-none transition-colors"
                     />
                   </div>
@@ -153,6 +203,9 @@ export default function ContactPage() {
                     <input
                       type="email"
                       placeholder="john@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       className="bg-black border-[3px] border-neutral-800 p-4 rounded-xl text-white font-afacad focus:border-[#5E2BE2] outline-none transition-colors"
                     />
                   </div>
@@ -207,12 +260,31 @@ export default function ContactPage() {
                   <textarea
                     rows={5}
                     placeholder="Tell me about your vision..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                     className="bg-black border-[3px] border-neutral-800 p-4 rounded-xl text-white font-afacad focus:border-[#5E2BE2] outline-none transition-colors resize-none"
                   ></textarea>
                 </div>
 
-                <button className="w-full bg-white border-[3px] border-white text-black px-8 py-5 font-agdasima text-3xl font-bold uppercase transition-all duration-300 hover:bg-transparent hover:text-white shadow-[8px_8px_0px_0px_#5E2BE2] flex items-center justify-center gap-3 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none">
-                  Send Message <Send className="w-6 h-6" />
+                {submitStatus === "success" && (
+                  <div className="p-4 bg-emerald-950/40 border-2 border-emerald-800 rounded-xl text-emerald-300 font-afacad text-center">
+                    Message sent successfully! I will reach out to you shortly.
+                  </div>
+                )}
+
+                {submitStatus === "error" && (
+                  <div className="p-4 bg-red-950/40 border-2 border-red-800 rounded-xl text-red-300 font-afacad text-center">
+                    {errorMessage}
+                  </div>
+                )}
+
+                <button 
+                  type="submit"
+                  disabled={submitStatus === "loading"}
+                  className="w-full bg-white border-[3px] border-white text-black px-8 py-5 font-agdasima text-3xl font-bold uppercase transition-all duration-300 hover:bg-transparent hover:text-white shadow-[8px_8px_0px_0px_#5E2BE2] flex items-center justify-center gap-3 active:translate-x-[4px] active:translate-y-[4px] active:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {submitStatus === "loading" ? "Sending..." : "Send Message"} <Send className="w-6 h-6" />
                 </button>
               </form>
 
