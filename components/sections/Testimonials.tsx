@@ -88,7 +88,7 @@ export function Testimonials() {
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 border border-neutral-700 bg-neutral-800 p-0.5 relative">
             <div className="w-full h-full rounded-full bg-neutral-700 overflow-hidden relative">
               <Image
-                src="/images/kallol.webp"
+                src="/images/kallol-sq.webp"
                 alt="Kamrul Hasan Kallol"
                 fill
                 className="object-cover"
@@ -165,7 +165,7 @@ export function Testimonials() {
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 border border-neutral-700 bg-neutral-800 p-0.5 relative">
             <div className="w-full h-full rounded-full bg-neutral-700 overflow-hidden relative">
               <Image
-                src="/images/kallol.webp"
+                src="/images/kallol-sq.webp"
                 alt="Kamrul Hasan Kallol"
                 fill
                 className="object-cover"
