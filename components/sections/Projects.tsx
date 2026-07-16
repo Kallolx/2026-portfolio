@@ -352,7 +352,7 @@ export function Projects() {
         {/* Transition Text - Hidden on mobile */}
         <div className="hidden md:flex w-full justify-center py-16">
           <p className="font-afacad italic text-neutral-400 text-lg md:text-2xl tracking-wide flex items-center gap-3">
-            One case study now, more soon{" "}
+            Three case study now, more soon{" "}
             <span className="not-italic text-lg">⛏️</span> — till then, enjoy
             some of my past work.
           </p>

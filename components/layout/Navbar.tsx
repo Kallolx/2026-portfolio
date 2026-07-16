@@ -128,7 +128,7 @@ export function Navbar() {
           {/* Top row - Stays fixed and stable */}
           <div className="flex h-[52px] items-center gap-2 shrink-0">
             <Link
-              href="#contact"
+              href="/contact"
               onClick={() => setIsOpen(false)}
               className="hidden min-[350px]:flex h-full items-center justify-center rounded-xl bg-white px-8 font-bold font-agdasima text-base uppercase tracking-widest text-black transition-transform hover:scale-95"
             >

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Agdasima, Afacad } from "next/font/google";
+import { Agdasima, Afacad, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const agdasima = Agdasima({
   variable: "--font-agdasima",
@@ -118,7 +121,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${agdasima.variable} ${afacad.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", agdasima.variable, afacad.variable, "font-sans", geist.variable)}
       suppressHydrationWarning
     >
       <body className="bg-black text-white min-h-full flex flex-col font-afacad">
