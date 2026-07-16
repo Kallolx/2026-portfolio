@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Let's Build Together",
-  description: "Get in touch with Kallol for websites, web applications, management systems, and custom software development.",
-  openGraph: {
-    title: "Let's Build Together | Kallol",
-    description: "Get in touch with Kallol for websites, web applications, management systems, and custom software development.",
-    url: "https://kamrulhasan.site/contact",
-  },
-  twitter: {
-    title: "Let's Build Together | Kallol",
-    description: "Get in touch with Kallol for websites, web applications, management systems, and custom software development.",
-  },
-};
+  description:
+    "Get in touch with Kallol for websites, web applications, management systems, and custom software development.",
+  path: "/contact",
+  keywords: ["contact Kallol", "hire software developer", "project inquiry"],
+});
 
 export default function ContactLayout({
   children,

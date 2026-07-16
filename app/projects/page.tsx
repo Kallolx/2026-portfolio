@@ -4,6 +4,7 @@ import { MAIN_PROJECTS, ARCHIVE_PROJECTS } from "@/data/projects";
 import Link from "next/link";
 import Image from "next/image";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { buildBreadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { Icon } from "@iconify/react";
 import {
   ArrowLeft,
@@ -19,10 +20,45 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
 export default function ProjectsPage() {
+  const allProjectRoutes = [...MAIN_PROJECTS, ...ARCHIVE_PROJECTS];
+  const pageSchema = [
+    buildBreadcrumbJsonLd([
+      { name: "Home", url: SITE_URL },
+      { name: "Projects", url: `${SITE_URL}/projects` },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: "Hall of Fame",
+      url: `${SITE_URL}/projects`,
+      description:
+        "Explore my full collection of digital experiments, featured case studies, and professional client work.",
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      mainEntity: {
+        "@type": "ItemList",
+        numberOfItems: allProjectRoutes.length,
+        itemListElement: allProjectRoutes.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: project.title,
+          url: `${SITE_URL}/projects/${project.slug}`,
+        })),
+      },
+    },
+  ];
+
   return (
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-black text-white pt-40 pb-24">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        />
         <div className="max-w-6xl mx-auto px-4 md:px-12 flex flex-col items-center">
           <div className="flex items-center justify-center w-full gap-2 md:gap-8 mb-10 relative">
             {/* Left Line SVG */}
@@ -120,9 +156,21 @@ export default function ProjectsPage() {
                           )}
 
                           <div className="relative z-10 flex items-center gap-2.5 w-full">
-                            <div
-                              className={`w-3.5 h-3.5 rounded-full shrink-0 ${isActive ? "bg-white opacity-80" : "bg-white/10 opacity-30 shadow-inner"}`}
-                            />
+                            <div className="w-3.5 h-3.5 rounded-full shrink-0 overflow-hidden bg-neutral-900 border border-neutral-700 flex items-center justify-center">
+                              {tab.logo ? (
+                                <Image
+                                  src={tab.logo}
+                                  alt={tab.tabName}
+                                  width={14}
+                                  height={14}
+                                  className="object-contain w-full h-full"
+                                />
+                              ) : (
+                                <div
+                                  className={`w-full h-full ${isActive ? "bg-white opacity-80" : "bg-white/10 opacity-30 shadow-inner"}`}
+                                />
+                              )}
+                            </div>
                             <span
                               className={`truncate grow font-afacad tracking-widest text-[10px] uppercase font-bold ${isActive ? "opacity-100" : "opacity-60"}`}
                             >
@@ -210,12 +258,24 @@ export default function ProjectsPage() {
                     {/* Right Details */}
                     <div className="flex flex-col flex-1 w-full justify-center">
                       <div className="flex flex-wrap items-center justify-between mb-4 gap-3">
-                        <div className="flex items-center gap-3 md:gap-4">
-                          <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-neutral-300 shrink-0 shadow-lg"></div>
-                          <h3 className="font-agdasima text-3xl md:text-5xl font-bold tracking-wide">
-                            {activeProject.title}
-                          </h3>
+                      <div className="flex items-center gap-3 md:gap-4">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
+                          {activeProject.logo ? (
+                            <Image
+                              src={activeProject.logo}
+                              alt={activeProject.title}
+                              width={28}
+                              height={28}
+                              className="object-contain"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-neutral-300 rounded-full" />
+                          )}
                         </div>
+                        <h3 className="font-agdasima text-3xl md:text-5xl font-bold tracking-wide">
+                          {activeProject.title}
+                        </h3>
+                      </div>
                         <span className="px-2 py-0.5 rounded border border-neutral-800 bg-neutral-800 text-neutral-400 text-[15px] font-afacad shrink-0">
                           {activeProject.badge}
                         </span>

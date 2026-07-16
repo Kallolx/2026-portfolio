@@ -3,6 +3,13 @@ import { Agdasima, Afacad, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { BottomBlur } from "@/components/layout/BottomBlur";
+import {
+  DEFAULT_OG_IMAGE,
+  SITE_AUTHOR,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -18,12 +25,14 @@ const afacad = Afacad({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kamrulhasan.site"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Kallol | Software Developer & Founder of Softune",
     template: "%s | Kallol",
   },
-  description: "Software developer with 5+ years of experience building websites, web applications, management systems, AI-powered products, and custom business solutions.",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  category: "portfolio",
   keywords: [
     "Kallol",
     "Kamrul Hasan Kallol",
@@ -39,17 +48,21 @@ export const metadata: Metadata = {
     "Custom Business Software",
   ],
   authors: [{ name: "Kallol" }],
-  creator: "Kallol",
+  creator: SITE_AUTHOR,
+  publisher: SITE_AUTHOR,
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kamrulhasan.site",
-    siteName: "Kallol Portfolio",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     title: "Kallol | Software Developer & Founder of Softune",
-    description: "Software developer with 5+ years of experience building websites, web applications, management systems, AI-powered products, and custom business solutions.",
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/og-banner.webp",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Kallol Portfolio Banner",
@@ -59,8 +72,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Kallol | Software Developer & Founder of Softune",
-    description: "Software developer with 5+ years of experience building websites, web applications, management systems, AI-powered products, and custom business solutions.",
-    images: ["/images/og-banner.webp"],
+    description: SITE_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE],
     creator: "@khxKallol",
   },
   robots: {
@@ -74,6 +87,21 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "android-chrome", url: "/favicon/android-chrome-192x192.png", sizes: "192x192" },
+      { rel: "android-chrome", url: "/favicon/android-chrome-512x512.png", sizes: "512x512" },
+    ],
+  },
+  manifest: "/favicon/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -81,43 +109,70 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kallol",
-    "alternateName": "Kamrul Hasan Kallol",
-    "url": "https://kamrulhasan.site",
-    "image": "https://kamrulhasan.site/images/pro.png",
-    "sameAs": [
-      "https://www.facebook.com/developer.kamrulhasan/",
-      "https://x.com/khxKallol",
-      "https://github.com/Kallolx",
-      "https://www.linkedin.com/in/kamrul-hasan-dev/",
-    ],
-    "jobTitle": "Software Developer",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Softune",
-      "url": "https://kamrulhasan.site",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: SITE_AUTHOR,
+      alternateName: "Kamrul Hasan Kallol",
+      url: SITE_URL,
+      image: `${SITE_URL}/images/pro.png`,
+      sameAs: [
+        "https://www.facebook.com/developer.kamrulhasan/",
+        "https://x.com/khxKallol",
+        "https://github.com/Kallolx",
+        "https://www.linkedin.com/in/kamrul-hasan-dev/",
+      ],
+      jobTitle: "Software Developer",
+      worksFor: {
+        "@type": "Organization",
+        name: "Softune",
+        url: SITE_URL,
+      },
+      description: SITE_DESCRIPTION,
+      knowsAbout: [
+        "Software Engineering",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "MongoDB",
+        "Docker",
+        "AWS",
+        "Product Design",
+      ],
     },
-    "description": "Software developer with 5+ years of experience building websites, web applications, management systems, AI-powered products, and custom business solutions.",
-    "knowsAbout": [
-      "Software Engineering",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "JavaScript",
-      "Node.js",
-      "Express.js",
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "MongoDB",
-      "Docker",
-      "AWS",
-      "Product Design",
-    ],
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: SITE_URL,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en-US",
+      publisher: {
+        "@type": "Person",
+        name: SITE_AUTHOR,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Softune",
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.svg`,
+      sameAs: [
+        "https://www.facebook.com/developer.kamrulhasan/",
+        "https://x.com/khxKallol",
+        "https://github.com/Kallolx",
+        "https://www.linkedin.com/in/kamrul-hasan-dev/",
+      ],
+    },
+  ];
 
   return (
     <html
@@ -126,10 +181,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-black text-white min-h-full flex flex-col font-afacad">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {jsonLd.map((schema) => (
+          <script
+            key={schema["@type"]}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
         {children}
         <BottomBlur />
       </body>

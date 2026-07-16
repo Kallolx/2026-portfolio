@@ -5,12 +5,42 @@ import { Footer } from "@/components/layout/Footer";
 import { Download, MousePointer2 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SITE_AUTHOR, SITE_NAME, SITE_URL, buildBreadcrumbJsonLd } from "@/lib/seo";
 
 export default function ResumePage() {
+  const pageSchema = [
+    buildBreadcrumbJsonLd([
+      { name: "Home", url: SITE_URL },
+      { name: "Resume", url: `${SITE_URL}/resume` },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      name: "Resume & Credentials",
+      url: `${SITE_URL}/resume`,
+      description:
+        "View and download the professional resume of Kallol, software developer and founder of Softune.",
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      mainEntity: {
+        "@type": "Person",
+        name: SITE_AUTHOR,
+        url: SITE_URL,
+      },
+    },
+  ];
+
   return (
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-black text-white pt-40 pb-24 overflow-hidden relative">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        />
         {/* Background Ambient Glows */}
         <div className="absolute top-[10%] left-[20%] w-[600px] h-[600px] bg-[#5E2BE2]/10 blur-[150px] rounded-full pointer-events-none -z-10" />
         <div className="absolute bottom-[10%] right-[20%] w-[500px] h-[500px] bg-[#86E49E]/5 blur-[120px] rounded-full pointer-events-none -z-10" />

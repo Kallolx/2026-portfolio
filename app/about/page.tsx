@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
+import { SITE_AUTHOR, SITE_NAME, SITE_URL, buildBreadcrumbJsonLd } from "@/lib/seo";
 
 interface SkillItem {
   name: string;
@@ -73,6 +74,14 @@ const EXPERIENCES = [
     year: "2023",
   },
   {
+    icon: "/images/fiverr.png",
+    titlePrefix: "Also active on",
+    titleBold: "Fiverr",
+    date: "2022 - 2023",
+    desc: "Delivered web development gigs to international clients, building a strong reputation for fast turnaround, clean code, and consistent communication across diverse project types.",
+    year: "2023",
+  },
+  {
     icon: "/images/webbyte.svg",
     titlePrefix: "Lead Developer at",
     titleBold: "Webbyte Agency",
@@ -99,10 +108,39 @@ const EXPERIENCES = [
 ];
 
 export default function AboutPage() {
+  const pageSchema = [
+    buildBreadcrumbJsonLd([
+      { name: "Home", url: SITE_URL },
+      { name: "About", url: `${SITE_URL}/about` },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: "Behind the Code",
+      url: `${SITE_URL}/about`,
+      description:
+        "A look at my journey from freelance projects to building complete digital products for businesses around the world.",
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      mainEntity: {
+        "@type": "Person",
+        name: SITE_AUTHOR,
+        url: SITE_URL,
+      },
+    },
+  ];
+
   return (
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-black text-white pt-40 pb-24 overflow-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        />
         {/* Header Section (Replicating Projects Page Vibe) */}
         <div className="max-w-6xl mx-auto px-4 md:px-12 flex flex-col items-center mb-8">
           <div className="flex items-center justify-center w-full gap-2 md:gap-4 mb-8 relative">

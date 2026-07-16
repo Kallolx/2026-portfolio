@@ -11,9 +11,76 @@ import { ArrowLeft, ExternalLink, Terminal } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { TechIcon } from "@/components/ui/TechIcon";
+import type { Metadata } from "next";
+import {
+  buildBreadcrumbJsonLd,
+  SITE_AUTHOR,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+const BASE_URL = "https://kamrulhasan.site";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const allProjects = [...MAIN_PROJECTS, ...ARCHIVE_PROJECTS];
+  const project = allProjects.find((p) => p.slug === slug);
+
+  if (!project) {
+    return { title: "Project Not Found | Kallol" };
+  }
+
+  const url = `${BASE_URL}/projects/${slug}`;
+  const ogImage = project.bannerImage || project.heroImage || "/images/og-banner.webp";
+  const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${BASE_URL}${ogImage}`;
+
+  return {
+    title: `${project.title} Case Study`,
+    description: project.description,
+    keywords: [
+      project.title,
+      "Kallol",
+      "Kamrul Hasan",
+      "Softune",
+      "Case Study",
+      ...project.techStack,
+    ],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      type: "article",
+      url,
+      title: `${project.title} Case Study | Kallol`,
+      description: project.description,
+      siteName: SITE_NAME,
+      authors: [SITE_AUTHOR],
+      tags: [project.title, ...project.techStack.slice(0, 6)],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} preview`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} Case Study | Kallol`,
+      description: project.description,
+      images: [ogImageUrl],
+      creator: "@khxKallol",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 export async function generateStaticParams() {
@@ -39,6 +106,43 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-black text-white pt-32 pb-24">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              buildBreadcrumbJsonLd([
+                { name: "Home", url: SITE_URL },
+                { name: "Projects", url: `${SITE_URL}/projects` },
+                {
+                  name: project.title || "Project",
+                  url: `${SITE_URL}/projects/${project.slug}`,
+                },
+              ]),
+              {
+                "@context": "https://schema.org",
+                "@type": "CreativeWork",
+                name: project.title,
+                description: project.description,
+                url: `${SITE_URL}/projects/${project.slug}`,
+                image: [
+                  project.bannerImage ||
+                    project.heroImage ||
+                    `${SITE_URL}/images/og-banner.webp`,
+                ],
+                author: {
+                  "@type": "Person",
+                  name: SITE_AUTHOR,
+                },
+                creator: {
+                  "@type": "Person",
+                  name: SITE_AUTHOR,
+                },
+                inLanguage: "en",
+                about: project.techStack,
+              },
+            ]),
+          }}
+        />
         <div className="max-w-6xl mx-auto px-4 md:px-12 flex flex-col items-center">
           {/* Top Back Link */}
           <div className="w-full mb-12">
@@ -250,3 +354,5 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
     </>
   );
 }
+
+

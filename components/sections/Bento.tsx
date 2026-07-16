@@ -44,7 +44,7 @@ export function Bento() {
               {/* Replace with your image eventually */}
               <div className="absolute inset-0 bg-neutral-800" />
               <Image
-                src="/images/kallol.webp"
+                src="/images/kallol-sq.webp"
                 alt="Profile photo"
                 fill
                 sizes="(max-w-768px) 100vw, 33vw"

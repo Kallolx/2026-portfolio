@@ -201,9 +201,13 @@ export function Projects() {
                       )}
 
                       <div className="relative z-10 flex items-center gap-2.5 w-full">
-                        <div
-                          className={`w-3.5 h-3.5 rounded-full shrink-0 ${isActive ? "bg-white opacity-80" : "bg-white/10 opacity-30 shadow-inner"}`}
-                        />
+                        <div className={`w-4 h-4 rounded-full shrink-0 overflow-hidden flex items-center justify-center ${isActive ? "opacity-100" : "opacity-40"}`}>
+                          {tab.logo ? (
+                            <Image src={tab.logo} alt={tab.tabName} width={16} height={16} className="object-contain w-full h-full" />
+                          ) : (
+                            <div className={`w-full h-full rounded-full ${isActive ? "bg-white opacity-80" : "bg-white/10"}`} />
+                          )}
+                        </div>
                         <span
                           className={`truncate grow font-afacad tracking-widest text-[10px] uppercase font-bold ${isActive ? "opacity-100" : "opacity-60"}`}
                         >

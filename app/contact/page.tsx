@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Mail, Send, MapPin, ChevronDown, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SITE_AUTHOR, SITE_NAME, SITE_URL, buildBreadcrumbJsonLd } from "@/lib/seo";
 
 const PROJECT_TYPES = [
   "Web Development",
@@ -26,6 +27,32 @@ export default function ContactPage() {
     setSelectedType(type);
     setIsDropdownOpen(false);
   };
+
+  const pageSchema = [
+    buildBreadcrumbJsonLd([
+      { name: "Home", url: SITE_URL },
+      { name: "Contact", url: `${SITE_URL}/contact` },
+    ]),
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: "Let's Build Together",
+      url: `${SITE_URL}/contact`,
+      description:
+        "Get in touch with Kallol for websites, web applications, management systems, and custom software development.",
+      isPartOf: {
+        "@type": "WebSite",
+        name: SITE_NAME,
+        url: SITE_URL,
+      },
+      mainEntity: {
+        "@type": "Person",
+        name: SITE_AUTHOR,
+        url: SITE_URL,
+        email: "kallol.business.ds@gmail.com",
+      },
+    },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,6 +97,10 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main className="w-full min-h-screen bg-black text-white pt-40 pb-24 relative overflow-hidden">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
+        />
         {/* Background Ambient Glow */}
         <div className="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-[#5E2BE2]/5 blur-[120px] rounded-full pointer-events-none -z-10" />
         <div className="absolute bottom-[10%] left-[-5%] w-[500px] h-[500px] bg-[#86E49E]/5 blur-[100px] rounded-full pointer-events-none -z-10" />
