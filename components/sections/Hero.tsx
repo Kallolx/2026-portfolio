@@ -135,7 +135,7 @@ export function Hero() {
           className="relative w-full max-w-[480px] lg:max-w-none aspect-[682/535] lg:pointer-events-auto"
         >
           {/* Location Badge (Top Right) */}
-          <div className="absolute top-6 right-6 z-40 flex items-center gap-1 px-3 py-1.5 bg-black/45 border border-white/10 rounded-full backdrop-blur-md shadow-lg select-none">
+          <div className="absolute top-6 right-6 z-40 hidden sm:flex items-center gap-1 px-3 py-1.5 bg-black/45 border border-white/10 rounded-full backdrop-blur-md shadow-lg select-none">
             <MapPin className="w-3.5 h-3.5 text-green-500 animate-pulse" />
             <span className="font-afacad text-xs md:text-sm font-medium text-white tracking-wide">
               Cox's Bazar, Bangladesh

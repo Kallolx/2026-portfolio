@@ -74,7 +74,7 @@ const EXPERIENCES = [
     year: "2023",
   },
   {
-    icon: "/images/fiverr.png",
+    icon: "/images/fiverr.svg",
     titlePrefix: "Also active on",
     titleBold: "Fiverr",
     date: "2022 - 2023",
