@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Agdasima, Afacad, Geist } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { BottomBlur } from "@/components/layout/BottomBlur";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -130,6 +131,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <BottomBlur />
       </body>
     </html>
   );

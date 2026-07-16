@@ -22,6 +22,14 @@ const EXPERIENCES = [
     year: "2023",
   },
   {
+    icon: "/images/fiverr.png",
+    titlePrefix: "Also active on",
+    titleBold: "Fiverr",
+    date: "2022 - 2023",
+    desc: "Delivered web development gigs to international clients, building a strong reputation for fast turnaround, clean code, and consistent communication across diverse project types.",
+    year: "2023",
+  },
+  {
     icon: "/images/webbyte.svg",
     titlePrefix: "Lead Developer at",
     titleBold: "Webbyte Agency",

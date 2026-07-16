@@ -123,7 +123,13 @@ export function Projects() {
 
             {/* Title & Logo */}
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-8 h-8 rounded-full bg-neutral-300 shrink-0 shadow-lg"></div>
+              <div className="w-9 h-9 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
+                {project.logo ? (
+                  <Image src={project.logo} alt={project.title} width={26} height={26} className="object-contain" />
+                ) : (
+                  <div className="w-full h-full bg-neutral-300 rounded-full" />
+                )}
+              </div>
               <h3 className="font-agdasima text-3xl font-bold tracking-wide">
                 {project.title.split(" - ")[0]}
               </h3>
@@ -289,7 +295,13 @@ export function Projects() {
                   <div className="flex flex-col flex-1 w-full justify-center">
                     <div className="flex flex-wrap items-center justify-between mb-4  gap-3">
                       <div className="flex items-center gap-3 md:gap-4">
-                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-neutral-300 shrink-0 shadow-lg"></div>
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
+                          {activeProject.logo ? (
+                            <Image src={activeProject.logo} alt={activeProject.title} width={28} height={28} className="object-contain" />
+                          ) : (
+                            <div className="w-full h-full bg-neutral-300 rounded-full" />
+                          )}
+                        </div>
                         <h3 className="font-agdasima text-3xl md:text-5xl font-bold tracking-wide">
                           {activeProject.title}
                         </h3>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { IPhoneMockup } from "./IPhoneMockup";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProjectCardProps {
   slug: string;
@@ -11,6 +12,7 @@ interface ProjectCardProps {
   year: string;
   image?: string;
   color?: string;
+  logo?: string;
 }
 
 export function ProjectCard({
@@ -19,6 +21,7 @@ export function ProjectCard({
   year,
   image,
   color,
+  logo,
 }: ProjectCardProps) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -68,6 +71,12 @@ export function ProjectCard({
             <IPhoneMockup image={image} />
           </motion.div>
         </div>
+        {/* Project logo circle — top left */}
+        {logo && (
+          <div className="absolute top-3 left-3 z-20 w-10 h-10 rounded-full bg-neutral-900/90 border border-neutral-700 flex items-center justify-center overflow-hidden shadow-lg">
+            <Image src={logo} alt={`${title} logo`} width={28} height={28} className="object-contain" />
+          </div>
+        )}
       </motion.div>
 
       <div className="flex items-center justify-between w-full px-1">

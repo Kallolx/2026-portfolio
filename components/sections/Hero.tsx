@@ -1,9 +1,60 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowDown, MapPin } from "lucide-react";
+
+// Count-up hook — animates from 0 → target when element enters viewport
+function useCountUp(target: number, duration = 1800) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  const animate = useCallback(() => {
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [target, duration]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          animate();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [animate]);
+
+  return { count, ref };
+}
+
+// Stat block with count-up animation
+function StatBlock({ target, suffix, label }: { target: number; suffix: string; label: string }) {
+  const { count, ref } = useCountUp(target);
+  return (
+    <div className="flex flex-col items-center lg:items-start">
+      <h2 className="text-5xl font-agdasima sm:text-6xl text-white tracking-wide font-bold">
+        <span ref={ref}>{count}</span>{suffix}
+      </h2>
+      <p className="font-agdasima text-neutral-400 text-2xl">{label}</p>
+    </div>
+  );
+}
 
 export function Hero() {
   const [isHovered, setIsHovered] = useState(false);
@@ -66,22 +117,8 @@ export function Hero() {
 
         {/* Stats */}
         <div className="flex items-center gap-12 sm:gap-16 mt-12 lg:mt-12 justify-center lg:justify-start">
-          <div className="flex flex-col items-center lg:items-start">
-            <h2 className="text-5xl font-agdasima sm:text-6xl text-white tracking-wide font-bold">
-              120+
-            </h2>
-            <p className="font-agdasima text-neutral-400 text-2xl">
-              Projects
-            </p>
-          </div>
-          <div className="flex flex-col items-center lg:items-start">
-            <h2 className="text-5xl font-agdasima  sm:text-6xl text-white tracking-wide font-bold">
-              3+ years
-            </h2>
-            <p className="font-agdasima text-neutral-400 text-2xl">
-              Experience
-            </p>
-          </div>
+          <StatBlock target={120} suffix="+" label="Projects" />
+          <StatBlock target={3} suffix="+ years" label="Experience" />
         </div>
       </motion.div>
 

@@ -23,6 +23,7 @@ export interface Project {
   codeSnippet?: string;
   year: string;
   color?: string;
+  logo?: string;
 }
 
 // 1. Featured Projects for the Sticky Browser UI (EXACT NAMES)
@@ -156,6 +157,7 @@ export const MAIN_PROJECTS: Project[] = [
     githubUrl: "",
     year: "2026",
     color: "#00A86B",
+    logo: "/images/o1.png",
   },
   {
     slug: "tooltune",
@@ -224,6 +226,7 @@ export const MAIN_PROJECTS: Project[] = [
     liveUrl: "https://toolbox-central-ebon.vercel.app/",
     year: "2026",
     color: "#2563EB",
+    logo: "/images/p2.png",
   },
   {
     slug: "socialcards",
@@ -290,6 +293,7 @@ export const MAIN_PROJECTS: Project[] = [
     liveUrl: "https://www.photocard.online/",
     year: "2025",
     color: "#8B6834",
+    logo: "/images/p3.png",
   },
 ];
 
