@@ -5,7 +5,7 @@ export const SITE_NAME = "Kallol Portfolio";
 export const SITE_AUTHOR = "Kallol";
 export const SITE_DESCRIPTION =
   "Software developer building websites, web applications, management systems, AI-powered products, and custom business solutions.";
-export const DEFAULT_OG_IMAGE = "/images/og-banner.webp";
+export const DEFAULT_OG_IMAGE = "/images/og-banner.png";
 
 const BASE_KEYWORDS = [
   "Kallol",

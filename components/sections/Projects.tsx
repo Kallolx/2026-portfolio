@@ -125,7 +125,8 @@ export function Projects() {
             <div className="flex items-center gap-3 mb-3">
               <div className="w-9 h-9 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
                 {project.logo ? (
-                  <Image src={project.logo} alt={project.title} width={26} height={26} className="object-contain" />
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={project.logo} alt={project.title} className="w-7 h-7 object-contain" />
                 ) : (
                   <div className="w-full h-full bg-neutral-300 rounded-full" />
                 )}
@@ -203,7 +204,8 @@ export function Projects() {
                       <div className="relative z-10 flex items-center gap-2.5 w-full">
                         <div className={`w-4 h-4 rounded-full shrink-0 overflow-hidden flex items-center justify-center ${isActive ? "opacity-100" : "opacity-40"}`}>
                           {tab.logo ? (
-                            <Image src={tab.logo} alt={tab.tabName} width={16} height={16} className="object-contain w-full h-full" />
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={tab.logo} alt={tab.tabName} className="w-full h-full object-contain" />
                           ) : (
                             <div className={`w-full h-full rounded-full ${isActive ? "bg-white opacity-80" : "bg-white/10"}`} />
                           )}
@@ -301,7 +303,8 @@ export function Projects() {
                       <div className="flex items-center gap-3 md:gap-4">
                         <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-neutral-900 border border-neutral-700 shrink-0 shadow-lg flex items-center justify-center overflow-hidden">
                           {activeProject.logo ? (
-                            <Image src={activeProject.logo} alt={activeProject.title} width={28} height={28} className="object-contain" />
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={activeProject.logo} alt={activeProject.title} className="w-7 h-7 object-contain" />
                           ) : (
                             <div className="w-full h-full bg-neutral-300 rounded-full" />
                           )}

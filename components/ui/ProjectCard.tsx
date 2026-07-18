@@ -74,7 +74,8 @@ export function ProjectCard({
         {/* Project logo circle — top left */}
         {logo && (
           <div className="absolute top-3 left-3 z-20 w-10 h-10 rounded-full bg-neutral-900/90 border border-neutral-700 flex items-center justify-center overflow-hidden shadow-lg">
-            <Image src={logo} alt={`${title} logo`} width={28} height={28} className="object-contain" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={logo} alt={`${title} logo`} className="w-7 h-7 object-contain" />
           </div>
         )}
       </motion.div>
