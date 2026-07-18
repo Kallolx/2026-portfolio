@@ -94,7 +94,91 @@ export const MAIN_PROJECTS: Project[] = [
     year: "2026",
     color: "#0EA5E9",
   },
+  
   */
+{
+  slug: "hotel-easy",
+  tabName: "HotelEasy - Hotel Management",
+  domain: "hotel-management",
+  title: "Hotel Management System",
+  badge: "Featured Project",
+  description:
+    "HotelEasy is a modern hotel and resort management platform built for Sea View Resort to simplify front desk operations, bookings, restaurant management, billing, and daily business management.",
+
+  features: [
+    {
+      icon: "🏨",
+      title: "Front Desk",
+      desc: "Manage bookings, check-in, check-out, room rack, guests, and payments from one dashboard.",
+    },
+    {
+      icon: "🛏️",
+      title: "Room Management",
+      desc: "Track room availability, room status, reservations, and guest allocation in real time.",
+    },
+    {
+      icon: "🍽️",
+      title: "Restaurant POS",
+      desc: "Handle dine-in, takeaway, room service, tables, and billing with an integrated POS.",
+    },
+    {
+      icon: "👨‍🍳",
+      title: "Kitchen Display",
+      desc: "Organize live kitchen orders with New, Preparing, Ready, and Completed stages.",
+    },
+    {
+      icon: "💳",
+      title: "Billing",
+      desc: "Manage guest invoices, restaurant bills, payments, dues, and receipts in one place.",
+    },
+    {
+      icon: "📊",
+      title: "Management Dashboard",
+      desc: "Monitor occupancy, revenue, daily activity, and business performance with live reports.",
+    },
+  ],
+
+  heroImage: "/projects/3.1.webp",
+  bannerImage: "/projects/hero/3.1.webp",
+
+  overview:
+  "HotelEasy was developed for Sea View Resort to modernize daily hotel operations through a single, easy-to-use platform. The system brings together front desk management, room reservations, restaurant POS, kitchen operations, billing, and business reporting into one centralized solution. Built with role-based access control, each department receives its own workspace, allowing staff to focus only on the tools they need while managers gain complete visibility over business operations.",
+
+challenges:
+  "The primary challenge was creating software that local hotel staff could learn and use with minimal training. The platform had to replace multiple manual processes while keeping the interface clean and intuitive. Another challenge was connecting reservations, room management, restaurant orders, kitchen workflow, and billing into a unified system that remained fast, reliable, and easy to navigate.",
+
+achievements:
+  "Successfully delivered a complete hotel and resort management platform tailored for local businesses. The project streamlined front desk operations, digitized room and guest management, integrated restaurant and kitchen workflows, simplified billing and payment processing, and provided real-time business insights through dedicated management dashboards. The result is a scalable, modern solution that improves efficiency while maintaining a simple user experience.",
+
+techStack: [
+  "Next.js 15",
+  "React 19",
+  "TypeScript",
+  "Tailwind CSS",
+  "shadcn/ui",
+  "Framer Motion",
+  "TanStack Query",
+  "Prisma ORM",
+  "PostgreSQL",
+  "Redis",
+  "NextAuth.js",
+  "Role-Based Access Control",
+  "REST API",
+  "WebSockets",
+  "Cloudflare R2",
+  "Chart.js",
+  "Zod",
+  "React Hook Form",
+  "Docker",
+  "Vercel",
+],
+  liveUrl: "",
+  githubUrl: "",
+
+  year: "2026",
+  color: "#22C55E",
+  logo: "/images/hotel.png",
+},
   {
     slug: "payit",
     tabName: "PayIT - Payment Automation",
@@ -228,73 +312,6 @@ export const MAIN_PROJECTS: Project[] = [
     color: "#2563EB",
     logo: "/images/p2.png",
   },
-  {
-    slug: "socialcards",
-    tabName: "Phonecards - Photo Gen",
-    domain: "photocard.app",
-    title: "Photocards Generator",
-    badge: "Recent Work",
-    description:
-      "Socialcards is a multi-format social card generator  that has live RSS news ingestion, URL-to-card automation, AI-assisted content workflows, and high-quality export.",
-    features: [
-      {
-        icon: "🧩",
-        title: "50+ Card Types",
-        desc: "Supports URL Newscard, Comment/Quote, Marketing, Real Estate, Youtube Thumbnail and Wish cards from a single dashboard.",
-      },
-      {
-        icon: "📰",
-        title: "Latest News RSS Feeds",
-        desc: "Aggregates and mixes RSS feeds across Bangladesh, Global, Asia, Europe, and USA sources with deduplication.",
-      },
-      {
-        icon: "⚡",
-        title: "URL-to-Card Automation",
-        desc: "Converts links into ready-to-edit cards with metadata extraction, news context transfer, and fast route handoff into generator flows.",
-      },
-      {
-        icon: "✨",
-        title: "AI-Assisted Content Tools",
-        desc: "Includes AI remix/rewrite workflows and assistant-driven text generation to speed headline, caption, and content iteration.",
-      },
-      {
-        icon: "🎨",
-        title: "Deep Customization + Bangla Support",
-        desc: "Provides logo, font, color, background, and theme controls with Bangla conversion and Bengali typography support built into the editor experience.",
-      },
-      {
-        icon: "📤",
-        title: "Production Export + Access Control",
-        desc: "Delivers HD card export and plan-based feature gating (news feed, background remover, AI remix, API access, analytics) across user tiers.",
-      },
-    ],
-    heroImage: "/projects/3.webp",
-    bannerImage: "/projects/hero/3.webp",
-    overview:
-      "Socialcards was built as an end-to-end social media card workspace where teams can move from content discovery to final export without leaving the product. It combines live RSS news streams, URL-based generation, multi-template editing, and localized/Bangla-ready output for creator and newsroom workflows.",
-    challenges:
-      "The hardest engineering challenge was maintaining speed and consistency while merging diverse feed sources, metadata extraction, and multiple generator routes. We solved this with parallel feed fetching, de-duplication by link/title, source balancing, cache/revalidation windows, and guarded premium-access flows across the dashboard.",
-    achievements:
-      "Delivered a unified creator workflow across 12+ card types, improved recency and variety of news cards with regional RSS aggregation, reduced repeated work through auto-filled generation flows, and strengthened monetization UX through reliable plan-based gating and upgrade prompts.",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "rss-parser",
-      "date-fns",
-      "OpenAI API",
-      "Google Gemini API",
-      "Node.js",
-      "REST API",
-      "MySQL",
-      "Puppeteer",
-      "Cloudflare",
-    ],
-    liveUrl: "https://www.photocard.online/",
-    year: "2025",
-    color: "#8B6834",
-    logo: "/images/p3.png",
-  },
 ];
 
 // 2. Secondary Projects for the Landing Page Grid (EXACT NAMES)
@@ -364,6 +381,73 @@ export const SECONDARY_PROJECTS = [
     liveUrl: "https://www.distrozi.com/",
     year: "2026",
     color: "#8B5CF6",
+  },
+    {
+    slug: "socialcards",
+    tabName: "Phonecards - Photo Gen",
+    domain: "photocard.app",
+    title: "Photocards Generator",
+    badge: "Recent Work",
+    description:
+      "Socialcards is a multi-format social card generator  that has live RSS news ingestion, URL-to-card automation, AI-assisted content workflows, and high-quality export.",
+    features: [
+      {
+        icon: "🧩",
+        title: "50+ Card Types",
+        desc: "Supports URL Newscard, Comment/Quote, Marketing, Real Estate, Youtube Thumbnail and Wish cards from a single dashboard.",
+      },
+      {
+        icon: "📰",
+        title: "Latest News RSS Feeds",
+        desc: "Aggregates and mixes RSS feeds across Bangladesh, Global, Asia, Europe, and USA sources with deduplication.",
+      },
+      {
+        icon: "⚡",
+        title: "URL-to-Card Automation",
+        desc: "Converts links into ready-to-edit cards with metadata extraction, news context transfer, and fast route handoff into generator flows.",
+      },
+      {
+        icon: "✨",
+        title: "AI-Assisted Content Tools",
+        desc: "Includes AI remix/rewrite workflows and assistant-driven text generation to speed headline, caption, and content iteration.",
+      },
+      {
+        icon: "🎨",
+        title: "Deep Customization + Bangla Support",
+        desc: "Provides logo, font, color, background, and theme controls with Bangla conversion and Bengali typography support built into the editor experience.",
+      },
+      {
+        icon: "📤",
+        title: "Production Export + Access Control",
+        desc: "Delivers HD card export and plan-based feature gating (news feed, background remover, AI remix, API access, analytics) across user tiers.",
+      },
+    ],
+    heroImage: "/projects/3.webp",
+    bannerImage: "/projects/hero/3.webp",
+    overview:
+      "Socialcards was built as an end-to-end social media card workspace where teams can move from content discovery to final export without leaving the product. It combines live RSS news streams, URL-based generation, multi-template editing, and localized/Bangla-ready output for creator and newsroom workflows.",
+    challenges:
+      "The hardest engineering challenge was maintaining speed and consistency while merging diverse feed sources, metadata extraction, and multiple generator routes. We solved this with parallel feed fetching, de-duplication by link/title, source balancing, cache/revalidation windows, and guarded premium-access flows across the dashboard.",
+    achievements:
+      "Delivered a unified creator workflow across 12+ card types, improved recency and variety of news cards with regional RSS aggregation, reduced repeated work through auto-filled generation flows, and strengthened monetization UX through reliable plan-based gating and upgrade prompts.",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "rss-parser",
+      "date-fns",
+      "OpenAI API",
+      "Google Gemini API",
+      "Node.js",
+      "REST API",
+      "MySQL",
+      "Puppeteer",
+      "Cloudflare",
+    ],
+    liveUrl: "https://www.photocard.online/",
+    year: "2025",
+    color: "#8B6834",
+    logo: "/images/p3.png",
   },
   {
     slug: "starvibe",
